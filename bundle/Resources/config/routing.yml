@@ -1,0 +1,16 @@
+
+ezplatform_restv3_updateFields:
+    path: /content/object/{locationId}
+    defaults:
+        _controller: ezplatform_restv3.controller.content:updateFields
+    methods: [PATCH]
+    requirements:
+        locationId: '\d+'
+
+ezplatform_restv3_updateContent:
+    path: /content/object/{locationId}
+    defaults:
+        _controller: ezplatform_restv3.controller.content:updateContent
+    methods: [PUT]
+    requirements:
+        locationId: '\d+'

@@ -1,0 +1,2 @@
+parameters:
+    ezplatform_restv3.path_prefix: /api/ezp/v2

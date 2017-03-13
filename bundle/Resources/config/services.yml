@@ -1,0 +1,8 @@
+parameters:
+    ezplatform_restv3.controller.content.class: 'EzSystems\Restv3\Core\Controller\ContentController'
+
+services:
+
+    ezplatform_restv3.controller.content:
+        class: '%ezplatform_restv3.controller.content.class%'
+        parent: ezpublish_rest.controller.content

@@ -1,0 +1,39 @@
+parameters:
+    ezplatform_restv3.input.parser.SimpleContentCreate.class: EzSystems\Restv3\Core\Input\Parser\SimpleContentCreate
+    ezplatform_restv3.input.parser.SimpleContentUpdate.class: EzSystems\Restv3\Core\Input\Parser\SimpleContentUpdate
+    ezplatform_restv3.input.parser.SimpleLocationCreate.class: EzSystems\Restv3\Core\Input\Parser\SimpleLocationCreate
+
+services:
+
+    ezplatform_restv3.input.parser.SimpleContentCreate:
+        parent: ezpublish_rest.input.parser
+        class: '%ezplatform_restv3.input.parser.SimpleContentCreate.class%'
+        arguments:
+            - '@ezpublish.api.service.content'
+            - '@ezpublish.api.service.content_type'
+            - '@ezpublish.api.service.user'
+            - '@ezpublish_rest.field_type_parser'
+            - '@ezplatform_restv3.input.parser.SimpleLocationCreate'
+            - '@ezpublish_rest.parser_tools'
+        tags:
+            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.SimpleContentCreate }
+
+    ezplatform_restv3.input.parser.SimpleContentUpdate:
+        parent: ezpublish_rest.input.parser
+        class: '%ezplatform_restv3.input.parser.SimpleContentUpdate.class%'
+        arguments:
+            - '@ezpublish.api.service.content'
+            - '@ezpublish.api.service.location'
+            - '@ezpublish_rest.field_type_parser'
+        tags:
+            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.SimpleContentUpdate }
+
+    ezplatform_restv3.input.parser.SimpleLocationCreate:
+        parent: ezpublish_rest.input.parser
+        class: '%ezplatform_restv3.input.parser.SimpleLocationCreate.class%'
+        arguments:
+            - '@ezpublish.api.service.location'
+            - '@ezpublish.api.service.url_alias'
+            - '@ezpublish_rest.parser_tools'
+        tags:
+            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.SimpleLocationCreate }

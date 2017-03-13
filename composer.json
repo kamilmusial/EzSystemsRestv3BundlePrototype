@@ -1,0 +1,28 @@
+{
+    "name": "ezsystems/ezplatform-restv3",
+    "description": "V3 REST eZ Platform",
+    "authors": [
+        {
+            "name": "eZ Systems",
+            "email": "dev-team@ez.no"
+        }
+    ],
+    "license": "TTL-2.0",
+    "autoload": {
+        "psr-4": {
+            "EzSystems\\Restv3\\": "lib",
+            "EzSystems\\Restv3Bundle\\": "bundle"
+        }
+    },
+    "require": {
+        "ezsystems/ezpublish-kernel": "^6.8",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.7"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
+}
