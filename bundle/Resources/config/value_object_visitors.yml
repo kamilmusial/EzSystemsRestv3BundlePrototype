@@ -1,0 +1,13 @@
+parameters:
+    ezplatform_restv3.output.value_object_visitor.RestContent.class: EzSystems\Restv3\Core\Output\ValueObjectVisitor\SimpleRestContent
+
+services:
+    ezplatform_restv3.output.value_object_visitor.RestContent:
+        parent: ezpublish_rest.output.value_object_visitor.base
+        class: "%ezplatform_restv3.output.value_object_visitor.RestContent.class%"
+        arguments:
+            - '@ezpublish.api.service.field_type'
+            - '@ezpublish_rest.field_type_processor_registry'
+            - '@ezpublish.api.service.url_alias'
+        tags:
+            - { name: ezpublish_rest.output.value_object_visitor, type: eZ\Publish\Core\REST\Server\Values\RestContent }

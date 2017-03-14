@@ -26,5 +26,6 @@ class EzSystemsRestv3Extension extends Extension
         $loader->load('services.yml');
         $loader->load('default_settings.yml');
         $loader->load('parsers.yml');
+        $loader->load('value_object_visitors.yml');
     }
 }

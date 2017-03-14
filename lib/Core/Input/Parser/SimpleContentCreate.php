@@ -119,8 +119,8 @@ class SimpleContentCreate extends BaseParser
 
         $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $mainLanguageCode);
 
-        if (array_key_exists('ContentSection', $data) && (is_array($data['ContentSection']) || is_string($data['ContentSection']))) {
-            $contentCreateStruct->sectionId = $data['ContentSection'];
+        if (array_key_exists('Section', $data) && (is_array($data['Section']) || is_string($data['Section']))) {
+            $contentCreateStruct->sectionId = $data['Section'];
         }
 
         if (array_key_exists('alwaysAvailable', $data)) {
@@ -135,10 +135,10 @@ class SimpleContentCreate extends BaseParser
             $contentCreateStruct->modificationDate = new DateTime($data['modificationDate']);
         }
 
-        if (array_key_exists('User', $data)) {
-            $userId = $data['User'];
-            if (is_string($data['User'])) {
-                $userId = $this->userService->loadUserByLogin($data['User'])->getUserId();
+        if (array_key_exists('Owner', $data)) {
+            $userId = $data['Owner'];
+            if (is_string($data['Owner'])) {
+                $userId = $this->userService->loadUserByLogin($data['Owner'])->getUserId();
             }
 
             $contentCreateStruct->ownerId = $userId;

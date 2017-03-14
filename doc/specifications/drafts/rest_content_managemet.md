@@ -20,7 +20,7 @@ __Content-Type:__ _application/vnd.ez.api.SimpleContentCreate+json_
         "ContentType": "article",
         "ContentLocation": "/places-tastes/tastes/",
         "ContentSection": 1,
-        "User": "jessica",
+        "Owner": "jessica",
         "alwaysAvailable": "false",
         "modificationDate": "2017-03-02T12:00:00",
         "remoteId": "remote123456",
