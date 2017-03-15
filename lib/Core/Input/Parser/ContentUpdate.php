@@ -22,7 +22,7 @@ use DateTime;
 /**
  * Parser for ContentCreate.
  */
-class SimpleContentUpdate extends BaseParser
+class ContentUpdate extends BaseParser
 {
     /**
      * Content service.

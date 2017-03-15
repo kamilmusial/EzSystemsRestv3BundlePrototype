@@ -18,7 +18,7 @@ use eZ\Publish\API\Repository\LocationService;
 /**
  * Parser for LocationCreate.
  */
-class SimpleLocationCreate extends BaseParser
+class LocationCreate extends BaseParser
 {
     /**
      * Location service.
@@ -66,42 +66,42 @@ class SimpleLocationCreate extends BaseParser
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher)
     {
-        $parentLocationId = $data['ContentLocation'];
-        if (is_string($data['ContentLocation'])) {
-            $urlAlias = $this->URLAliasService->lookup($data['ContentLocation']);
+        $locationCreate = $data['LocationCreate'];
+
+        if (array_key_exists('_parentId', $locationCreate)) {
+            $parentLocation = $this->locationService->loadLocation($locationCreate['_parentId']);
+        } elseif (array_key_exists('_parentUrlAliasPath', $locationCreate)) {
+            $urlAlias = $this->URLAliasService->lookup($locationCreate['_parentUrlAliasPath']);
             $parentLocationId = $urlAlias->destination;
+            $parentLocation = $this->locationService->loadLocation($parentLocationId);
+        } else {
+            throw new Exceptions\Parser("Missing 'parentId' or parentUrlAliasPath element for LocationCreate.");
         }
-        $parentLocation = $this->locationService->loadLocation($parentLocationId);
 
         $locationCreateStruct = $this->locationService->newLocationCreateStruct(
             $parentLocation->id
         );
 
-        // @todo: metadata
+        if (array_key_exists('priority', $locationCreate)) {
+            $locationCreateStruct->priority = (int)$locationCreate['priority'];
+        }
 
-//        if (array_key_exists('priority', $data)) {
-//            $locationCreateStruct->priority = (int)$data['priority'];
-//        }
-//
-//        if (array_key_exists('hidden', $data)) {
-//            $locationCreateStruct->hidden = $this->parserTools->parseBooleanValue($data['hidden']);
-//        }
-//
-//        if (array_key_exists('remoteId', $data)) {
-//            $locationCreateStruct->remoteId = $data['remoteId'];
-//        }
+        if (array_key_exists('hidden', $locationCreate)) {
+            $locationCreateStruct->hidden = $this->parserTools->parseBooleanValue($locationCreate['hidden']);
+        }
 
-//        if (!array_key_exists('sortField', $data)) {
-//            throw new Exceptions\Parser("Missing 'sortField' element for LocationCreate.");
-//        }
-//
-//        $locationCreateStruct->sortField = $this->parserTools->parseDefaultSortField($data['sortField']);
-//
-//        if (!array_key_exists('sortOrder', $data)) {
-//            throw new Exceptions\Parser("Missing 'sortOrder' element for LocationCreate.");
-//        }
-//
-//        $locationCreateStruct->sortOrder = $this->parserTools->parseDefaultSortOrder($data['sortOrder']);
+        if (array_key_exists('remoteId', $locationCreate)) {
+            $locationCreateStruct->remoteId = $locationCreate['remoteId'];
+        }
+
+        if (array_key_exists('sortField', $locationCreate)) {
+            $locationCreateStruct->sortField = $this->parserTools->parseDefaultSortField($locationCreate['sortField']);
+        }
+
+        if (array_key_exists('sortOrder', $locationCreate)) {
+            $locationCreateStruct->sortOrder = $this->parserTools->parseDefaultSortOrder($locationCreate['sortOrder']);
+        }
+
 
         return $locationCreateStruct;
     }

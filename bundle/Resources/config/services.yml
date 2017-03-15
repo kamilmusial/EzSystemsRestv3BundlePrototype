@@ -1,5 +1,6 @@
 parameters:
     ezplatform_restv3.controller.content.class: 'EzSystems\Restv3\Core\Controller\ContentController'
+    ezplatform_restv3.listener.request.class: 'EzSystems\Restv3\Core\EventListener\RequestListener'
 
 services:
 

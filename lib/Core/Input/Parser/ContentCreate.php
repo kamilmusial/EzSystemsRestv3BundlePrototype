@@ -22,7 +22,7 @@ use DateTime;
 /**
  * Parser for ContentCreate.
  */
-class SimpleContentCreate extends BaseParser
+class ContentCreate extends BaseParser
 {
     /**
      * Content service.
@@ -55,7 +55,7 @@ class SimpleContentCreate extends BaseParser
     /**
      * LocationCreate parser.
      *
-     * @var \EzSystems\Restv3\Core\Input\Parser\SimpleLocationCreate
+     * @var \EzSystems\Restv3\Core\Input\Parser\LocationCreate
      */
     protected $locationCreateParser;
 
@@ -73,7 +73,7 @@ class SimpleContentCreate extends BaseParser
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
-     * @param \EzSystems\Restv3\Core\Input\Parser\SimpleLocationCreate $locationCreateParser
+     * @param \EzSystems\Restv3\Core\Input\Parser\LocationCreate $locationCreateParser
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
     public function __construct(
@@ -81,7 +81,7 @@ class SimpleContentCreate extends BaseParser
         ContentTypeService $contentTypeService,
         UserService $userService,
         FieldTypeParser $fieldTypeParser,
-        SimpleLocationCreate $locationCreateParser,
+        LocationCreate $locationCreateParser,
         ParserTools $parserTools
     ) {
         $this->contentService = $contentService;
@@ -102,11 +102,11 @@ class SimpleContentCreate extends BaseParser
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher)
     {
-        if (!array_key_exists('ContentLocation', $data) || (!is_numeric($data['ContentLocation']) && !is_string($data['ContentLocation']))) {
-            throw new Exceptions\Parser("Missing or invalid 'ContentLocation' element for SimpleContentCreate.");
+        if (!array_key_exists('LocationCreate', $data)) {
+            throw new Exceptions\Parser("Missing 'ContentLocation' element for SimpleContentCreate.");
         }
 
-        $locationCreateStruct = $this->locationCreateParser->parse(['ContentLocation' => $data['ContentLocation']], $parsingDispatcher);
+        $locationCreateStruct = $this->locationCreateParser->parse(['LocationCreate' => $data['LocationCreate']], $parsingDispatcher);
 
         if (!array_key_exists('ContentType', $data) || (!is_array($data['ContentType']) && !is_string($data['ContentType']))) {
             throw new Exceptions\Parser("Missing or invalid 'ContentType' element for SimpleContentCreate.");
