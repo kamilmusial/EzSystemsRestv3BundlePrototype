@@ -8,7 +8,7 @@
 
 __Accept:__ _application/vnd.ez.api.Content+json_
 
-__Content-Type:__ _application/vnd.ez.api.SimpleContentCreate+json_
+__Content-Type:__ _application/vnd.ez.api.ContentCreate+json; version=2.0_
 
 
 
@@ -16,9 +16,11 @@ __Content-Type:__ _application/vnd.ez.api.SimpleContentCreate+json_
 
 ```json
 {
-    "SimpleContentCreate": {
+    "ContentCreate": {
         "ContentType": "article",
-        "ContentLocation": "/places-tastes/tastes/",
+        "LocationCreate": {
+            "_parentUrlAliasPath": "/places-tastes/tastes/"
+        },
         "ContentSection": 1,
         "Owner": "jessica",
         "alwaysAvailable": "false",
@@ -39,9 +41,11 @@ __Content-Type:__ _application/vnd.ez.api.SimpleContentCreate+json_
 #### 1.1 simple request
 ```json
 {
-    "SimpleContentCreate": {
+    "ContentCreate": {
         "ContentType": "article",
-        "ContentLocation": "/places-tastes/tastes/",
+        "LocationCreate": {
+            "_parentUrlAliasPath": "/places-tastes/tastes/"
+        },
         "fields": {
             "title": "This is a title",
             "intro": {
@@ -65,11 +69,11 @@ _For both output is a standard Content rest object_
 
 __Accept:__ _application/vnd.ez.api.Content+json_
 
-__Content-Type:__ _application/vnd.ez.api.SimpleContentUpdate+json_
+__Content-Type:__ _application/vnd.ez.api.ContentUpdate+json; version=2.0_
 
 ```json
 {
-    "SimpleContentUpdate": {
+    "ContentUpdate": {
         "fields": {
             "name": "This is a new title"
         }
